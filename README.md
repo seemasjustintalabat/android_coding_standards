@@ -98,6 +98,20 @@ android:layout_**** attributes at the top</br>
 ```
 
 
+#### 2.3.2.2 Strings
+
+String names start with a prefix that identifies the section they belong to. For example `registration_email_hint` or `registration_name_hint`. If a string __doesn't belong__ to any section, then you should follow the rules below:
+
+
+| Prefix             | Description                           |
+| -----------------  | --------------------------------------|
+| `error_`             | An error message                      |
+| `msg_`               | A regular information message         |
+| `title_`             | A title, i.e. a dialog title          |
+| `action_`            | An action such as "Save" or "Create"  |
+
+
+
 
 
 
