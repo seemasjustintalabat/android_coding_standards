@@ -69,7 +69,7 @@ A good practice is to not include the word `menu` as part of the name because th
 Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
 #### 1.2.2.4 Organizing layout XMLs
-`android:id` as the first attribute always
+`android:id` as the first attribute always</br>
 android:layout_**** attributes at the top
 `style` attribute at the bottom
 
