@@ -1,4 +1,4 @@
-# android_coding_standards
+# Android Coding Standards
 
 ### 1.0 Resources files
 
@@ -67,4 +67,34 @@ A good practice is to not include the word `menu` as part of the name because th
 #### 1.2.2.4 Values files
 
 Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
+
+#### 1.2.2.4 Organizing layout XMLs
+`android:id` as the first attribute always
+android:layout_**** attributes at the top
+`style` attribute at the bottom
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/name"
+        style="@style/FancyText"
+        />
+
+    <include layout="@layout/reusable_part" />
+
+</LinearLayout>
+```
+
 
