@@ -571,6 +571,25 @@ public Observable<Location> syncLocations() {
 }
 ```
 
+## 2.3 MVP
+
+
+![alt text](https://cdn-images-1.medium.com/max/2400/0*4E8U5YuG22bLp4h8.)
+
+* Views should be "passive", meaning they contain as little decision logic as possible
+* Names of View interface methods should be direct commands:
+
+```java
+ showLoadingDialog()
+
+```
+* Names of Presenter interface methods should reflect the action taken in the view:
+```java
+onLoginButtonClick()
+
+```
+
+
 
 ## 2.4 Tests style rules
 
