@@ -350,6 +350,8 @@ There is no single correct solution for this but using a __logical__ and __consi
 6. Private methods
 7. Inner classes or interfaces
 
+More info [here](https://source.android.com/source/code-style.html)
+
 Example:
 
 ```java
@@ -542,7 +544,7 @@ loadPicture(context,
         "Title of the picture");
 ```
 ### 2.2.16 Write short methods
-When feasible, keep methods small and focused. We recognize that long methods are sometimes appropriate, so no hard limit is placed on method length. If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.
+When feasible, keep methods small and focused. We recognize that long methods are sometimes appropriate, so no hard limit is placed on method length. If a method exceeds __40 lines or so__, think about whether it can be broken up without harming the structure of the program.
 
 
 ### 2.2.17 RxJava chains styling
