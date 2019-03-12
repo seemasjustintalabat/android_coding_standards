@@ -541,8 +541,11 @@ loadPicture(context,
         clickListener,
         "Title of the picture");
 ```
+### 2.2.16 Write short methods
+When feasible, keep methods small and focused. We recognize that long methods are sometimes appropriate, so no hard limit is placed on method length. If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.
 
-### 2.2.16 RxJava chains styling
+
+### 2.2.17 RxJava chains styling
 
 Rx chains of operators require line-wrapping. Every operator must go in a new line and the line should be broken before the `.`
 
@@ -564,8 +567,6 @@ public Observable<Location> syncLocations() {
 }
 ```
 
-### 2.2.16 Write short methods
-When feasible, keep methods small and focused. We recognize that long methods are sometimes appropriate, so no hard limit is placed on method length. If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.
 
 ## 2.4 Tests style rules
 
