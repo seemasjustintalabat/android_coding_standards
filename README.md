@@ -4,7 +4,7 @@
 
 Resources file names are written in __lowercase_underscore__.
 
-#### 1.2.2.1 Drawable files
+#### 1.0.1 Drawable files
 
 Naming conventions for drawables:
 
@@ -42,7 +42,7 @@ Naming conventions for selector states:
 | Selected     | `_selected`     | `btn_order_selected.9.png`  |
 
 
-#### 1.2.2.2 Layout files
+#### 1.0.2 Layout files
 
 Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
 
@@ -58,17 +58,17 @@ A slightly different case is when we are creating a layout that is going to be i
 
 Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `partial_`.
 
-#### 1.2.2.3 Menu files
+#### 1.0.3 Menu files
 
 Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
 
 A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
 
-#### 1.2.2.4 Values files
+#### 1.0.4 Values files
 
 Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
-#### 1.2.2.4 Organizing layout XMLs
+#### 1.0.5 Organizing layout XMLs
 `android:id` as the first attribute always</br>
 android:layout_**** attributes at the top</br>
 `style` attribute at the bottom</br>
@@ -98,7 +98,7 @@ android:layout_**** attributes at the top</br>
 ```
 
 
-#### 2.3.2.2 Strings
+#### 1.0.6 Strings
 
 String names start with a prefix that identifies the section they belong to. For example `registration_email_hint` or `registration_name_hint`. If a string __doesn't belong__ to any section, then you should follow the rules below:
 
@@ -110,7 +110,7 @@ String names start with a prefix that identifies the section they belong to. For
 | `title_`             | A title, i.e. a dialog title          |
 | `action_`            | An action such as "Save" or "Create"  |
 
-#### 2.3.2.3 Styles and Themes
+#### 1.0.7 Styles and Themes
 
 Unlike the rest of resources, style names are written in __UpperCamelCase__.
 
@@ -563,6 +563,9 @@ public Observable<Location> syncLocations() {
             });
 }
 ```
+
+### 2.2.16 Write short methods
+When feasible, keep methods small and focused. We recognize that long methods are sometimes appropriate, so no hard limit is placed on method length. If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.
 
 ## 2.4 Tests style rules
 
