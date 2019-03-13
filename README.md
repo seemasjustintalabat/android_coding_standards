@@ -673,3 +673,185 @@ class MyFavouriteVeryLongClassHolder :
     fun foo() { ... }
 }
 ```
+
+### 3.1.5 Modifiers
+
+If a declaration has multiple modifiers, always put them in the following order:
+
+```kotlin
+public / protected / private / internal
+expect / actual
+final / open / abstract / sealed / const
+external
+override
+lateinit
+tailrec
+vararg
+suspend
+inner
+enum / annotation
+companion
+inline
+infix
+operator
+data
+```
+
+### 3.1.5 Formatting control flow statements
+* Put the `else`, `catch`, `finally` keywords, as well as the while keyword of a do/while loop, on the same line as the preceding curly brace:
+```kotlin
+if (condition) {
+    // body
+} else {
+    // else part
+}
+
+try {
+    // body
+} finally {
+    // cleanup
+}
+```
+* In a when statement, if a branch is more than a single line, consider separating it from adjacent case blocks with a blank line:
+```
+private fun parsePropertyValue(propName: String, token: Token) {
+    when (token) {
+        is Token.ValueToken ->
+            callback.visitValue(propName, token.value)
+
+        Token.LBRACE -> { // ...
+        }
+    }
+}
+```
+### 3.1.6 Method call formatting
+
+In long argument lists, put a line break after the opening parenthesis. Indent arguments by 4 spaces. Group multiple closely related arguments on the same line.
+
+```
+drawSquare(
+    x = 10, y = 10,
+    width = 100, height = 100,
+    fill = true
+)
+```
+Put spaces around the `=` sign separating the argument name and value.
+### 3.1.7 Chained call wrapping
+When wrapping chained calls, put the `.` character or the `?.` operator on the next line, with a single indent:
+
+```
+val anchor = owner
+    ?.firstChild!!
+    .siblings(forward = true)
+    .dropWhile { it is PsiComment || it is PsiWhiteSpace }
+```
+The first call in the chain usually should have a line break before it, but it's OK to omit it if the code makes more sense that way.
+
+### 3.1.8  Lambda formatting
+
+In lambda expressions, spaces should be used around the curly braces, as well as around the arrow which separates the parameters from the body. If a call takes a single lambda, it should be passed outside of parentheses whenever possible.
+
+```
+list.filter { it > 10 }
+```
+If assigning a label for a lambda, do not put a space between the label and the opening curly brace:
+
+```
+fun foo() {
+    ints.forEach lit@{
+        // ...
+    }
+}
+```
+When declaring parameter names in a multiline lambda, put the names on the first line, followed by the arrow and the newline:
+
+```
+appendCommaSeparated(properties) { prop ->
+    val propertyValue = prop.get(obj)  // ...
+}
+```
+If the parameter list is too long to fit on a line, put the arrow on a separate line:
+
+```
+foo {
+   context: Context,
+   environment: Env
+   ->
+   context.configureEnv(environment)
+}
+```
+
+### 3.1.8  Documentation comments
+
+For longer documentation comments, place the opening /** on a separate line and begin each subsequent line with an asterisk:
+
+```kotlin
+/**
+ * This is a documentation comment
+ * on multiple lines.
+ */
+ ```
+Short comments can be placed on a single line:
+
+```kotlin
+
+/** This is a short documentation comment. */
+```
+Generally, avoid using @param and @return tags. Instead, incorporate the description of parameters and return values directly into the documentation comment, and add links to parameters wherever they are mentioned. Use @param and @return only when a lengthy description is required which doesn't fit into the flow of the main text.
+
+
+// Avoid doing this:
+```kotlin
+/**
+ * Returns the absolute value of the given number.
+ * @param number The number to return the absolute value for.
+ * @return The absolute value.
+ */
+fun abs(number: Int) = ...
+
+// Do this instead:
+
+/**
+ * Returns the absolute value of the given [number].
+ */
+fun abs(number: Int) = ...
+```
+
+### 3.1.9 Using conditional statements
+
+Prefer using the expression form of try, if and when. Examples:
+
+```kotlin
+return if (x) foo() else bar()
+
+return when(x) {
+    0 -> "zero"
+    else -> "nonzero"
+}
+```
+The above is preferable to:
+
+```kotlin
+if (x)
+    return foo()
+else
+    return bar()
+    
+when(x) {
+    0 -> return "zero"
+    else -> return "nonzero"
+}
+```
+if versus when
+
+Prefer using if for binary conditions instead of when. Instead of
+
+```kotlin
+when (x) {
+    null -> ...
+    else -> ...
+}
+use if (x == null) ... else ...
+```
+Prefer using `when` if there are three or more options.
+
