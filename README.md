@@ -618,3 +618,15 @@ onView(withId(R.id.view))
         .check(matches(isDisplayed()))
 ```
 
+# 2 Code guidelines
+
+## 2.1 Kotlin language rules
+
+### 2.1.1 Class layout
+
+Generally, the contents of a class is sorted in the following order:
+
+* Property declarations and initializer blocks
+* Secondary constructors
+* Method declarations
+* Companion object
