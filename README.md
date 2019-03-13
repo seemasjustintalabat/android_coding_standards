@@ -618,11 +618,11 @@ onView(withId(R.id.view))
         .check(matches(isDisplayed()))
 ```
 
-# 2 Code guidelines
+# 3 Kotlin Code guidelines
 
-## 2.1 Kotlin language rules
+## 3.1 Kotlin language rules
 
-### 2.1.1 Class layout
+### 3.1.1 Class layout
 
 Generally, the contents of a class is sorted in the following order:
 
@@ -630,3 +630,46 @@ Generally, the contents of a class is sorted in the following order:
 * Secondary constructors
 * Method declarations
 * Companion object
+
+### 3.1.2 Naming rules
+
+Kotlin follows the Java naming conventions
+```kotlin
+open class DeclarationProcessor { ... }
+
+object EmptyDeclarationProcessor : DeclarationProcessor() { ... }
+```
+### 3.1.3 Function names
+
+Names of functions, properties and local variables start with a lower case letter and use camel humps and no underscores:
+
+```kotlin
+fun processDeclarations() { ... }
+var declarationCount = ...
+```
+### 3.1.4 Class header formatting
+* Classes with a few primary constructor parameters can be written in a single line:
+
+```kotlin
+class Person(id: Int, name: String)
+```
+* Classes with longer headers should be formatted so that each primary constructor parameter is in a separate line with indentation. Also, the closing parenthesis should be on a new line. If we use inheritance, then the superclass constructor call or list of implemented interfaces should be located on the same line as the parenthesis:
+
+```kotlin
+class Person(
+    id: Int,
+    name: String,
+    surname: String
+) : Human(id, name) { ... }
+```
+* To clearly separate the class header and body when the class header is long, either put a blank line following the class header (as in the example above), or put the opening curly brace on a separate line:
+
+```kotlin
+class MyFavouriteVeryLongClassHolder :
+    MyLongHolder<MyFavouriteVeryLongClass>(),
+    SomeOtherInterface,
+    AndAnotherOne 
+{
+    fun foo() { ... }
+}
+```
