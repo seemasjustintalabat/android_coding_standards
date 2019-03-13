@@ -697,7 +697,7 @@ operator
 data
 ```
 
-### 3.1.5 Formatting control flow statements
+### 3.1.6 Formatting control flow statements
 * Put the `else`, `catch`, `finally` keywords, as well as the while keyword of a do/while loop, on the same line as the preceding curly brace:
 ```kotlin
 if (condition) {
@@ -724,7 +724,7 @@ private fun parsePropertyValue(propName: String, token: Token) {
     }
 }
 ```
-### 3.1.6 Method call formatting
+### 3.1.7 Method call formatting
 
 In long argument lists, put a line break after the opening parenthesis. Indent arguments by 4 spaces. Group multiple closely related arguments on the same line.
 
@@ -736,7 +736,7 @@ drawSquare(
 )
 ```
 Put spaces around the `=` sign separating the argument name and value.
-### 3.1.7 Chained call wrapping
+### 3.1.8 Chained call wrapping
 When wrapping chained calls, put the `.` character or the `?.` operator on the next line, with a single indent:
 
 ```
@@ -747,7 +747,7 @@ val anchor = owner
 ```
 The first call in the chain usually should have a line break before it, but it's OK to omit it if the code makes more sense that way.
 
-### 3.1.8  Lambda formatting
+### 3.1.9  Lambda formatting
 
 In lambda expressions, spaces should be used around the curly braces, as well as around the arrow which separates the parameters from the body. If a call takes a single lambda, it should be passed outside of parentheses whenever possible.
 
@@ -781,7 +781,7 @@ foo {
 }
 ```
 
-### 3.1.8  Documentation comments
+### 3.1.10  Documentation comments
 
 For longer documentation comments, place the opening /** on a separate line and begin each subsequent line with an asterisk:
 
@@ -817,7 +817,7 @@ fun abs(number: Int) = ...
 fun abs(number: Int) = ...
 ```
 
-### 3.1.9 Using conditional statements
+### 3.1.11 Using conditional statements
 
 Prefer using the expression form of try, if and when. Examples:
 
