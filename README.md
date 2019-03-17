@@ -606,20 +606,110 @@ public class MenuSection {
 ### Interactor
 You can think of an interactor as your "Model/Controller".
 An interactor will fetch data from the database, web services, or any other data source. After getting the data, the interactor will send the data to the presenter. Thus, making changes in your UI.
-Name the Interactor as a `Listener`. This should be the difference between the Presenter and the Interactor.
-* `GroceryDetailsListener` should be the interactor for `GroceryDetailsPresenter`.
+#### Naming 
+* Name the Interactor as an `Interactor`. This should be the difference between the Presenter and the Interactor. `GroceryDetailsInteractor` should be the interactor for `GroceryDetailsPresenter`.
+* Interactor interface should reflect that data that is been gotten. Use namings like:
+```kotlin
+fun getChoiceSection(id: Int)
+```
+* Add the word `Listener` to interfaces that share data to the presenter. `GroceryDetailsListener` should share data with `GroceryDetailsPresenter`.
+```kotlin
+interface GroceryDetailsListener{
+	....
+}
+```
+* Name Interactor callback appropriately to show the completed data fetching funtion.
+```kotlin
+    fun onChoiceReceived(splitChoiceItemModel: SplitChoiceItemModel?)
+```
+### Implementation
+* Use Retrofit as network library
+* Use RxAndroid to manage asynchronous UI events.
+```java
+@GET
+        Observable<SplitChoiceRM> getChoice(@Url String url);
+```
+```kotlin
+override fun getChoice(url: String) {
+         ApiHandler.callApi().getChoice(url)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(object : DisposableObserver<SplitChoiceRM>() {
+                     override fun onNext(splitChoiceRM: SplitChoiceRM) {
+                         groceryDetailsListener?.onChoiceReady(splitChoiceRM.result.items[0])
+                         }
 
+                     override fun onError(e: Throwable) {
+                         groceryDetailsListener?.onItemsDataError()
+                     }
 
+                     override fun onComplete() {
+
+                     }
+                 })
+    }
+```
+## Presenter
+The presenter is responsible to act as the middleman between view and interactor. It retrieves data from the interactor and returns it formatted to the view. it should have a method for each possible action the user can do.It comprises of an interface and its implementation.
+
+### Naming
+* Add the word `Presenter` to the naming like `GroceryDetailsPresenter`
+* Add letter `I` to represent its interface like `IGroceryDetailsPresenter`
+* Name the interface methods to represent the action intended to be sent to the interactor.
+```kotlin
+fun addItem(restaurant: Restaurant?, cartMenuItem: CartMenuItem?)
+fun getMenuSection(menuSectionId: Int): MenuSection
+```
+* Inject the view reference into the presenter constructor and name like `GroceryDetailsView` without letter `I`
+
+### Implementation
+* The presenter must have a reference to the interactor and view.
+* The presenter should implement its interface by calling the interactor's and view's methods. 
+* The presenter logic must be thin, most business logics must be kept in the interactor.
+```kotlin
+class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGroceryDetailsPresenter, GroceryDetailsListener {
+	private var groceryDetailsView: GroceryDetailsView? = _groceryDetailsView
+    	private var iGroceryDetailsInteractor: IGroceryDetailsInteractor?
+	init {
+        	iGroceryDetailsInteractor = GroceryDetailsInteractor(this, groceryDetailsView?.getContext()!!)
+    	}
+	
+	override fun getChoice(id: Int) {
+        	iGroceryDetailsInteractor?.getChoice(id)
+    	}
+	
+	override fun loadMoreItems(pageNumber: Int) {
+        	loadMorePageNumber = pageNumber
+        	if (getInitialCondition(pageNumber)) {
+            		groceryDetailsView?.stopLoading()
+            		groceryDetailsView?.showClearButton(false)
+            		groceryDetailsView?.showEmptyScreen(false, false)
+            		groceryDetailsView?.updateList(getAllItemsToDisplay(), getPagingInfo(), query)
+			groceryDetailsView?.setItemsCount(getPagingInfo())
+            		groceryDetailsView?.setIsUpdateRequired(false)
+        	} else {
+            		if (TextUtils.isEmpty(searchEditText.text.toString().trim())) {
+                		iGroceryDetailsInteractor?.applyFilterAndSorting(pageNumber, 			GrocerySortAndFilterRequest(pageNumber.toString(), GlobalDataModel.GROCERY.pageSize.toString(), sortBy, sortOrder, filterBrands, tagIdsString), menuSectionId, GlobalDataModel.SELECTED.restaurant.getBranchId().toString())
+            		} else {
+                		setNewPageNumber(1)
+           		 }
+        	}
+    }
+
+}
+
+```
+
+## View
+
+* The View is implemented by an Activity and it contains the reference to the presenter. View’s job is to call a method from the Presenter every time there is a user interface action. 
+* A reference to the presenter is passed to the view. You can use as many presenter you like for a view. 
 * Views should be "passive", meaning they contain as little decision logic as possible
 * Names of View interface methods should be direct commands:
 
-```java
- showLoadingDialog()
-
-```
-* Names of Presenter interface methods should reflect the action taken in the view:
-```java
-onLoginButtonClick()
+```kotlin
+ fun showLoadingDialog()
+ fun setChoice(splitChoiceItemModel: SplitChoiceItemModel?)
 
 ```
 
