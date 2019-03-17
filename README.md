@@ -609,7 +609,7 @@ An interactor will fetch data from the database, web services, or any other data
 #### Naming 
 * Name the Interactor as an `Interactor`. This should be the difference between the Presenter and the Interactor. `GroceryDetailsInteractor` should be the interactor for `GroceryDetailsPresenter`.
 * Name `Interactor` interface with letter `I` like `IGroceryDetailsInteractor`
-* Interactor interface should reflect the data that is been gotten. Use namings like:
+* Interactor interface names should reflect the data that is been gotten. Use namings like:
 ```kotlin
 fun getChoiceSection(id: Int)
 ```
