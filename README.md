@@ -576,6 +576,40 @@ public Observable<Location> syncLocations() {
 
 ![alt text](https://cdn-images-1.medium.com/max/2400/0*4E8U5YuG22bLp4h8.)
 
+
+### Model
+Model is the data layer.It is a POJO/DATA class that holds the holds data in the web API service or database.
+
+```java
+public class MenuSection {
+    @SerializedName("id")
+    private int id;
+    @SerializedName("nm")
+    private String name;
+    
+    public String getName() {
+        return title;
+    }
+ 
+    public void setName(String name) {
+        this.name = name;
+    }
+ 
+    public int getId() {
+        return id;
+    }
+ 
+    public void setId(int id) {
+        this.id = id;
+    }
+```
+### Interactor
+You can think of an interactor as your "Model/Controller".
+An interactor will fetch data from the database, web services, or any other data source. After getting the data, the interactor will send the data to the presenter. Thus, making changes in your UI.
+Name the Interactor as a `Listener`. This should be the difference between the Presenter and the Interactor.
+* `GroceryDetailsListener` should be the interactor for `GroceryDetailsPresenter`.
+
+
 * Views should be "passive", meaning they contain as little decision logic as possible
 * Names of View interface methods should be direct commands:
 
