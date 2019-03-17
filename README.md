@@ -728,7 +728,7 @@ class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGrocer
 ## View
 
 * The View is implemented by an Activity and it contains the reference to the presenter. View’s job is to call a method from the Presenter every time there is a user interface action. 
-* A reference of the presenter is passed to the view. You can use as many presenter you like for a view. 
+* A reference of the presenter is passed to the view. You can use as many presenters you like for a view. 
 * Views should be "passive", meaning they contain as little decision logic as possible
 * Names of View interface methods should be direct commands:
 
@@ -741,7 +741,7 @@ class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGrocer
 interface GroceryDetailsView : Talabat {
  	fun showLoadingDialog()
  	fun setChoice(splitChoiceItemModel: SplitChoiceItemModel?)
-
+}
 ```
 
 
