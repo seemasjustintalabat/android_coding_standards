@@ -738,7 +738,7 @@ class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGrocer
 
 ```
 ```kotlin
-interface GroceryDetailsView : Talabat {
+interface GroceryDetailsView : TalabatBaseView {
  	fun showLoadingDialog()
  	fun setChoice(splitChoiceItemModel: SplitChoiceItemModel?)
 }
