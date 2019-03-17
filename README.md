@@ -578,7 +578,7 @@ public Observable<Location> syncLocations() {
 
 
 ### Model
-Model is the data layer.It is a POJO/DATA class that holds the holds data in the web API service or database.
+Model is the data layer.It is a POJO/DATA class that holds data in the web API service or database.
 
 ```java
 public class MenuSection {
@@ -612,6 +612,14 @@ An interactor will fetch data from the database, web services, or any other data
 ```kotlin
 fun getChoiceSection(id: Int)
 ```
+```kotlin
+interface IGroceryDetailsInteractor : IGlobalInteractor {
+    fun loadMoreItems(menuSectionId: Int, branchId: String, pageNumber: String)
+    fun setTotalPages(totalPages: Int)
+    fun getGroceryItemsForSection(menuSectionId: Int, branchId: Int)
+    fun getChoice(id:Int)
+}
+```
 * Add the word `Listener` to interfaces that share data to the presenter. `GroceryDetailsListener` should share data with `GroceryDetailsPresenter`.
 ```kotlin
 interface GroceryDetailsListener{
@@ -622,12 +630,19 @@ interface GroceryDetailsListener{
 ```kotlin
     fun onChoiceReceived(splitChoiceItemModel: SplitChoiceItemModel?)
 ```
+```kotlin
+interface GroceryDetailsListener : IGlobalListener {
+    fun onChoiceReceived(splitChoiceItemModel: SplitChoiceItemModel?)
+    fun onDataLoaded(pageNumber: Int, menuSectionId: Int, items: Array<MenuItem>)
+    fun onChoiceReady(splitChoiceItemModel: SplitChoiceItemModel?)
+}
+```
 ### Implementation
 * Use Retrofit as network library
 * Use RxAndroid to manage asynchronous UI events.
 ```java
 @GET
-        Observable<SplitChoiceRM> getChoice(@Url String url);
+Observable<SplitChoiceRM> getChoice(@Url String url);
 ```
 ```kotlin
 override fun getChoice(url: String) {
@@ -657,8 +672,11 @@ The presenter is responsible to act as the middleman between view and interactor
 * Add letter `I` to represent its interface like `IGroceryDetailsPresenter`
 * Name the interface methods to represent the action intended to be sent to the interactor.
 ```kotlin
-fun addItem(restaurant: Restaurant?, cartMenuItem: CartMenuItem?)
-fun getMenuSection(menuSectionId: Int): MenuSection
+interface IGroceryDetailsPresenter : IGlobalPresenter {
+	fun addItem(restaurant: Restaurant?, cartMenuItem: CartMenuItem?)
+	fun getMenuSection(menuSectionId: Int): MenuSection
+	
+}
 ```
 * Inject the view reference into the presenter constructor and name like `GroceryDetailsView` without letter `I`
 
