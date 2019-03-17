@@ -634,12 +634,12 @@ interface GroceryDetailsListener{
 interface GroceryDetailsListener : IGlobalListener {
     fun onChoiceReceived(splitChoiceItemModel: SplitChoiceItemModel?)
     fun onDataLoaded(pageNumber: Int, menuSectionId: Int, items: Array<MenuItem>)
-    fun onChoiceReady(splitChoiceItemModel: SplitChoiceItemModel?)
 }
 ```
 ### Implementation
 * Use Retrofit as network library
 * Use RxAndroid to manage asynchronous UI events.
+* You may not use Global variables to observe completed request, use interactor callback.
 ```java
 @GET
 Observable<SplitChoiceRM> getChoice(@Url String url);
@@ -665,7 +665,7 @@ override fun getChoice(url: String) {
     }
 ```
 ## Presenter
-The presenter is responsible to act as the middleman between view and interactor. It retrieves data from the interactor and returns it formatted to the view. it should have a method for each possible action the user can do.It comprises of an interface and its implementation.
+The presenter is responsible to act as the middleman between view and interactor. It retrieves data from the interactor and returns it to the view. it should have a method for each possible action the user can do.It comprises of an interface and its implementation.
 
 ### Naming
 * Add the word `Presenter` to the naming like `GroceryDetailsPresenter`
@@ -678,7 +678,7 @@ interface IGroceryDetailsPresenter : IGlobalPresenter {
 	
 }
 ```
-* Inject the view reference into the presenter constructor and name like `GroceryDetailsView` without letter `I`
+* Inject the view reference into the presenter constructor and name it like `GroceryDetailsView` without letter `I`
 
 ### Implementation
 * The presenter must have a reference to the interactor and view.
@@ -728,6 +728,12 @@ class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGrocer
 ```kotlin
  fun showLoadingDialog()
  fun setChoice(splitChoiceItemModel: SplitChoiceItemModel?)
+
+```
+```kotlin
+interface GroceryDetailsView : Talabat {
+ 	fun showLoadingDialog()
+ 	fun setChoice(splitChoiceItemModel: SplitChoiceItemModel?)
 
 ```
 
