@@ -679,6 +679,12 @@ interface IGroceryDetailsPresenter : IGlobalPresenter {
 }
 ```
 * Inject the view reference into the presenter constructor and name it like `GroceryDetailsView` without letter `I`
+```kotlin
+class GroceryDetailsPresenter(_groceryDetailsView: GroceryDetailsView) : IGroceryDetailsPresenter, GroceryDetailsListener {
+....
+
+}
+```
 
 ### Implementation
 * The presenter must have a reference to the interactor and view.
